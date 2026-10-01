@@ -23,8 +23,10 @@
 
   const params = new URLSearchParams(location.search);
   const demo = params.has('demo');
-  const weekParam = params.get('week');
-  const archiveWeek = weekParam && /^\d{4}-\d{2}-\d{2}$/.test(weekParam) ? weekParam : null;
+  // ?day=2026-10-01 מציג יום אחד מהארכיון (?week= נשאר לקישורים ישנים)
+  const dayParam = params.get('day') || params.get('week');
+  const archiveWeek = dayParam && /^\d{4}-\d{2}-\d{2}$/.test(dayParam) ? dayParam : null;
+  let newestDay = null;
 
   // ---------- כלים ----------
 
@@ -61,13 +63,8 @@
   const pad = (n) => String(n).padStart(2, '0');
   const dm = (d) => (d ? `${pad(d.getDate())}.${pad(d.getMonth() + 1)}` : '');
 
-  function isoWeek(d) {
-    const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-    const day = t.getUTCDay() || 7;
-    t.setUTCDate(t.getUTCDate() + 4 - day);
-    const yearStart = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
-    return Math.ceil(((t - yearStart) / 86400000 + 1) / 7);
-  }
+  const WEEKDAYS = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'ש׳'];
+  const dayName = (d) => (d ? `יום ${WEEKDAYS[d.getDay()]} ${dm(d)}` : '');
 
   function hashSeed(s) {
     let x = 7;
@@ -113,13 +110,12 @@
   });
   setTheme(document.documentElement.getAttribute('data-theme') || 'mc');
 
-  // ---------- ספירה לאחור לסריקה הבאה (יום ראשון לפנות בוקר) ----------
+  // ---------- ספירה לאחור לסריקה הבאה (כל יום ב-03:00) ----------
 
   function nextScan(now) {
     const d = new Date(now);
     d.setHours(3, 0, 0, 0);
-    d.setDate(d.getDate() + ((7 - d.getDay()) % 7));
-    if (d <= now) d.setDate(d.getDate() + 7);
+    if (d <= now) d.setDate(d.getDate() + 1);
     return d;
   }
 
@@ -128,8 +124,7 @@
   function tick() {
     const now = new Date();
     const left = Math.max(0, Math.floor((nextScan(now) - now) / 1000));
-    cd.d.textContent = pad(Math.floor(left / 86400));
-    cd.h.textContent = pad(Math.floor((left % 86400) / 3600));
+    cd.h.textContent = pad(Math.floor(left / 3600));
     cd.m.textContent = pad(Math.floor((left % 3600) / 60));
     cd.s.textContent = pad(left % 60);
   }
@@ -163,6 +158,10 @@
     }
 
     const views = Number.isFinite(t.views) ? h('span', { class: 'views', text: `${compact.format(t.views)} צפיות` }) : null;
+    const isNew = !archiveWeek && newestDay && t.day === newestDay;
+    const today = new Date();
+    const todayIso = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+    const newTag = isNew ? h('span', { class: 'new-tag', text: newestDay === todayIso ? 'חדש היום' : 'חדש' }) : null;
     const play = h('span', { class: 'play', 'aria-hidden': 'true' });
     play.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="miter"><path d="M7 4 L19 12 L7 20 Z"/></svg>';
 
@@ -172,7 +171,7 @@
       class: 'thumb',
       'aria-label': `ניגון: ${t.title}`,
       onclick: () => playInCard(t, media, thumbBtn),
-    }, [canvas, img, h('span', { class: 'badge', 'data-platform': t.platform, text: p.badge }), play, views]);
+    }, [canvas, img, h('span', { class: 'badge', 'data-platform': t.platform, text: p.badge }), newTag, play, views]);
     media.append(thumbBtn);
 
     const authorUrl = safeUrl(t.authorUrl);
@@ -241,8 +240,8 @@
     const empty = $('#empty');
     empty.hidden = list.length > 0;
     empty.textContent = state.tricks.length
-      ? 'אין השבוע טריקים בשילוב הזה. נסו קטגוריה או פלטפורמה אחרת.'
-      : 'הבוט עוד לא העלה טריקים לשבוע הזה. הסריקה הבאה ביום ראשון לפנות בוקר.';
+      ? 'אין טריקים בשילוב הזה. נסו קטגוריה או פלטפורמה אחרת.'
+      : 'הבוט עוד לא מצא טריקים. הסריקה הבאה מחר לפנות בוקר.';
   }
 
   function chip(label, pressed, onclick) {
@@ -287,25 +286,33 @@
 
   function render(data) {
     state.tricks = (data.tricks || []).filter(validTrick);
-    const from = parseDay(data.from);
-    const to = parseDay(data.to);
+    const day = parseDay(data.week);
+    newestDay = data.week || null;
+    const now = new Date();
+    const isToday = day && day.toDateString() === now.toDateString();
+    const when = isToday ? 'היום' : day ? `ב${dayName(day)}` : '';
 
     if (archiveWeek) {
-      $('#tricks-title').textContent = from ? `הטריקים של ${dm(from)} – ${dm(to)}` : 'שבוע מהארכיון';
+      $('#tricks-title').textContent = day ? `הטריקים של ${dayName(day)}` : 'יום מהארכיון';
       $('#back-link').hidden = false;
     }
-    $('#week-num').textContent = from ? `WEEK ${isoWeek(from)}` : 'THIS WEEK';
+    $('#week-num').textContent = day ? `DAILY · ${dm(day)}` : 'DAILY';
     const hasYt = state.tricks.some((t) => t.platform === 'youtube');
     const hasTt = state.tricks.some((t) => t.platform === 'tiktok');
     const where = hasYt && hasTt ? 'מ-TikTok ומ-YouTube Shorts' : hasTt ? 'מ-TikTok' : 'מ-YouTube Shorts';
-    $('#tricks-sub').textContent = from
-      ? `השבוע של ${dm(from)} – ${dm(to)} · ${state.tricks.length} טריקים ${where}`
-      : 'הבוט עוד לא סיים את הסריקה הראשונה שלו.';
+    let sub = 'הבוט עוד לא סיים את הסריקה הראשונה שלו.';
+    if (day && archiveWeek) sub = `${state.tricks.length} טריקים ${where}`;
+    else if (day && data.recentDays > 1) {
+      sub = `${state.tricks.length} טריקים ${where} מ-${data.recentDays} הימים האחרונים`;
+      if (data.newToday > 0) sub += ` · ${data.newToday} חדשים ${when}`;
+    }
+    else if (day) sub = `${state.tricks.length} טריקים ${where} · הסריקה האחרונה ${when}`;
+    $('#tricks-sub').textContent = sub;
 
     const ran = data.generatedAt ? new Date(data.generatedAt) : null;
     $('#stat-last').textContent = ran && !isNaN(ran) ? whenFmt.format(ran) : 'עוד לא רץ';
     $('#stat-scanned').textContent = Number.isFinite(data.scanned) ? String(data.scanned) : '—';
-    $('#stat-count').textContent = String(state.tricks.length);
+    $('#stat-count').textContent = String(Number.isFinite(data.newToday) ? data.newToday : state.tricks.length);
 
     const src = data.sources || {};
     if (demo) {
@@ -332,22 +339,22 @@
 
   function renderArchive(weeks) {
     const list = $('#archive-list');
-    const valid = (Array.isArray(weeks) ? weeks : []).filter((w) => w && /^\d{4}-\d{2}-\d{2}$/.test(w.week));
+    // ימים שלא נמצא בהם כלום לא מוצגים בארכיון
+    const valid = (Array.isArray(weeks) ? weeks : []).filter((w) => w && /^\d{4}-\d{2}-\d{2}$/.test(w.week) && w.count !== 0);
     if (!valid.length) {
       list.replaceChildren(h('li', { class: 'muted', text: 'הארכיון יתמלא אחרי הסריקה הראשונה של הבוט.' }));
       return;
     }
     const current = archiveWeek || valid[0].week;
-    list.replaceChildren(...valid.map((w) => {
-      const from = parseDay(w.from);
-      const to = parseDay(w.to);
+    // 30 הימים האחרונים
+    list.replaceChildren(...valid.slice(0, 30).map((w) => {
+      const day = parseDay(w.week);
       return h('li', null, h('a', {
         class: 'panel',
-        href: `?week=${w.week}#tricks`,
+        href: `?day=${w.week}#tricks`,
         'aria-current': w.week === current ? 'page' : null,
       }, [
-        h('span', { text: from ? `שבוע ${isoWeek(from)}` : w.week }),
-        h('span', { class: 'archive-dates', text: from ? `${dm(from)} – ${dm(to)}` : '' }),
+        h('span', { text: dayName(day) }),
         h('span', { class: 'archive-count', text: Number.isFinite(w.count) ? `${w.count} טריקים` : '' }),
       ]));
     }));
@@ -370,7 +377,7 @@
     .then(render)
     .catch(() => {
       render({ tricks: [] });
-      showNotice(archiveWeek ? 'לא מצאתי את השבוע הזה בארכיון.' : 'לא הצלחתי לטעון את הטריקים. נסו לרענן את העמוד.');
+      showNotice(archiveWeek ? 'לא מצאתי את היום הזה בארכיון.' : 'לא הצלחתי לטעון את הטריקים. נסו לרענן את העמוד.');
     });
 
   fetch('data/weeks.json', { cache: 'no-cache' })
