@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>כל הטריקים · טריקים במיינקראפט כל שבוע</title>
-<meta name="description" content="כל שבוע הבוט סורק את TikTok ואת YouTube Shorts ומביא לכאן את הטריקים הכי טובים במיינקראפט.">
+<title>כל הטריקים · טריקים במיינקראפט כל יום</title>
+<meta name="description" content="כל יום הבוט סורק את TikTok ואת YouTube Shorts ומביא לכאן את הטריקים הכי טובים במיינקראפט.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +38,7 @@
     <div class="wrap header-row">
       <a class="logo" href="./"><span class="logo-mark" aria-hidden="true"></span><span>כל הטריקים</span></a>
       <nav class="nav" aria-label="ניווט ראשי">
-        <a href="#tricks">הטריקים של השבוע</a>
+        <a href="#tricks">הטריקים החדשים</a>
         <a href="#bot">איך הבוט עובד</a>
         <a href="#archive">ארכיון</a>
       </nav>
@@ -52,14 +52,14 @@
 
   <section class="hero wrap" aria-labelledby="hero-title">
     <div class="hero-text">
-      <p class="eyebrow"><span class="latin">WEEKLY DROP</span> · <span>סריקה שבועית של TikTok ו-YouTube Shorts</span></p>
+      <p class="eyebrow"><span class="latin">DAILY DROP</span> · <span>סריקה יומית של TikTok ו-YouTube Shorts</span></p>
       <div class="title-wrap">
-        <h1 id="hero-title">כל טריק מיינקראפט. כל שבוע.</h1>
-        <p class="splash" aria-hidden="true">מתעדכן לבד כל יום ראשון!</p>
+        <h1 id="hero-title">כל טריק מיינקראפט. כל יום.</h1>
+        <p class="splash" aria-hidden="true">מתעדכן לבד כל יום!</p>
       </div>
-      <p class="lead">הבוט עובר כל יום ראשון על TikTok ועל YouTube Shorts, מוצא את הטריקים הכי טובים במיינקראפט ומעלה אותם לכאן, עם קרדיט ליוצר וקישור לסרטון המקורי.</p>
+      <p class="lead">הבוט עובר כל יום על TikTok ועל YouTube Shorts, מוצא את הטריקים הכי טובים במיינקראפט ומעלה אותם לכאן, עם קרדיט ליוצר וקישור לסרטון המקורי.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#tricks">לטריקים של השבוע</a>
+        <a class="btn btn-primary" href="#tricks">לטריקים החדשים</a>
         <a class="btn" href="#bot">איך הבוט עובד</a>
       </div>
     </div>
@@ -67,7 +67,6 @@
     <aside class="bot-panel" aria-label="סטטוס הבוט">
       <p class="bot-label"><span class="latin">BOT</span> · הסריקה הבאה בעוד</p>
       <div class="countdown" role="timer" aria-live="off">
-        <div class="cd-cell"><span class="cd-num" data-unit="d">--</span><span class="cd-label">ימים</span></div>
         <div class="cd-cell"><span class="cd-num" data-unit="h">--</span><span class="cd-label">שעות</span></div>
         <div class="cd-cell"><span class="cd-num" data-unit="m">--</span><span class="cd-label">דקות</span></div>
         <div class="cd-cell"><span class="cd-num" data-unit="s">--</span><span class="cd-label">שניות</span></div>
@@ -75,7 +74,7 @@
       <dl class="bot-rows">
         <div><dt>סריקה אחרונה</dt><dd id="stat-last">—</dd></div>
         <div><dt>סרטונים שנבדקו</dt><dd id="stat-scanned">—</dd></div>
-        <div><dt>טריקים שעלו לאתר</dt><dd id="stat-count">—</dd></div>
+        <div><dt>טריקים חדשים בסריקה</dt><dd id="stat-count">—</dd></div>
       </dl>
       <ul class="connections">
         <li id="conn-youtube"><span class="dot" aria-hidden="true"></span><span class="conn-name">YouTube Shorts</span><span class="conn-state">—</span></li>
@@ -91,10 +90,10 @@
     <div id="notice" class="notice" hidden></div>
     <div class="section-head">
       <div>
-        <p class="eyebrow latin" id="week-num">THIS WEEK</p>
-        <h2 id="tricks-title">הטריקים של השבוע</h2>
+        <p class="eyebrow latin" id="week-num">DAILY</p>
+        <h2 id="tricks-title">הטריקים החדשים</h2>
         <p class="muted" id="tricks-sub">טוען את הטריקים…</p>
-        <p id="back-link" hidden><a href="./#tricks">חזרה לשבוע הנוכחי</a></p>
+        <p id="back-link" hidden><a href="./#tricks">חזרה לטריקים החדשים</a></p>
       </div>
       <p class="muted count" id="shown-count" aria-live="polite"></p>
     </div>
@@ -119,7 +118,7 @@
     <div class="section wrap">
       <p class="eyebrow latin">HOW IT WORKS</p>
       <h2 id="bot-title">איך הבוט עובד</h2>
-      <p class="muted intro">בלי לגלול שעות בפיד. פעם בשבוע הבוט עושה את העבודה ומשאיר רק את הטריקים ששווה לראות.</p>
+      <p class="muted intro">בלי לגלול שעות בפיד. כל יום הבוט עושה את העבודה ומשאיר רק את הטריקים ששווה לראות.</p>
       <div class="steps">
         <div class="step panel">
           <div class="step-top">
@@ -127,7 +126,7 @@
             <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="10" cy="10" r="6"></circle><path d="M15 15 L21 21"></path></svg>
           </div>
           <h3>סורק</h3>
-          <p>כל יום ראשון לפנות בוקר הבוט מחפש ב-YouTube Shorts וב-TikTok סרטונים מהשבוע האחרון, לפי מילות החיפוש שלמטה.</p>
+          <p>כל יום לפנות בוקר הבוט מחפש ב-YouTube Shorts וב-TikTok סרטונים מהיממה האחרונה, לפי מילות החיפוש שלמטה.</p>
         </div>
         <div class="step panel">
           <div class="step-top">
@@ -135,7 +134,7 @@
             <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M3 4 H21 L14 12 V19 L10 21 V12 Z"></path></svg>
           </div>
           <h3>מסנן</h3>
-          <p>משאיר רק סרטונים קצרים שבאמת מראים טריק במיינקראפט, בחיפוש בטוח, בלי צ׳יטים ובלי כפילויות משבועות קודמים. כל טריק מקבל קטגוריה.</p>
+          <p>משאיר רק סרטונים קצרים שבאמת מראים טריק במיינקראפט, בחיפוש בטוח, בלי צ׳יטים ובלי כפילויות מימים קודמים. כל טריק מקבל קטגוריה.</p>
         </div>
         <div class="step panel">
           <div class="step-top">
@@ -143,7 +142,7 @@
             <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 15 V3"></path><path d="M7 8 L12 3 L17 8"></path><path d="M4 14 V21 H20 V14"></path></svg>
           </div>
           <h3>מפרסם</h3>
-          <p>הטריקים הכי נצפים עולים לאתר עם קרדיט ליוצר וקישור לסרטון המקורי. השבוע הקודם עובר לארכיון.</p>
+          <p>הטריקים הכי נצפים עולים לאתר עם קרדיט ליוצר וקישור לסרטון המקורי. בעמוד הראשי מופיעים כל הטריקים מהשבוע האחרון, וכל יום נשמר בארכיון.</p>
         </div>
       </div>
       <p class="filter-label keywords-label">מה הבוט מחפש</p>
@@ -161,8 +160,8 @@
 
   <section id="archive" class="section wrap" aria-labelledby="archive-title">
     <p class="eyebrow latin">ARCHIVE</p>
-    <h2 id="archive-title">שבועות קודמים</h2>
-    <p class="muted intro">כל שבוע נשמר. אפשר לחזור לכל טריק שהבוט מצא.</p>
+    <h2 id="archive-title">ימים קודמים</h2>
+    <p class="muted intro">כל יום נשמר. אפשר לחזור לכל טריק שהבוט מצא.</p>
     <ul class="archive-list" id="archive-list"></ul>
   </section>
 </main>
@@ -170,7 +169,7 @@
 <footer class="site-footer">
   <div class="wrap footer-row">
     <span class="footer-logo">כל הטריקים</span>
-    <p>האתר מתעדכן אוטומטית פעם בשבוע. כל הסרטונים שייכים ליוצרים שלהם ומוצגים דרך הנגנים הרשמיים של YouTube ו-TikTok. האתר לא קשור ל-Mojang או ל-Microsoft.</p>
+    <p>האתר מתעדכן אוטומטית כל יום. כל הסרטונים שייכים ליוצרים שלהם ומוצגים דרך הנגנים הרשמיים של YouTube ו-TikTok. האתר לא קשור ל-Mojang או ל-Microsoft.</p>
   </div>
 </footer>
 
