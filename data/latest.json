@@ -1,8 +1,8 @@
 {
   "week": "2026-10-01",
-  "from": "2026-09-24",
-  "to": "2026-09-30",
-  "generatedAt": "2026-10-01T14:18:23.225Z",
+  "from": "2026-09-29",
+  "to": "2026-10-01",
+  "generatedAt": "2026-10-01T14:30:22.801Z",
   "scanned": 35,
   "sources": {
     "youtube": {
@@ -29,7 +29,8 @@
       "thumb": "https://i.ytimg.com/vi/8Sld6cXoPuY/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "בנייה"
+      "category": "בנייה",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7691300956654406942",
@@ -42,7 +43,8 @@
       "thumb": "data/thumbs/tiktok-7691300956654406942.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "רדסטון"
+      "category": "רדסטון",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:USu0VDttwrk",
@@ -55,7 +57,8 @@
       "thumb": "https://i.ytimg.com/vi/USu0VDttwrk/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "כללי"
+      "category": "כללי",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7682075480933010710",
@@ -68,7 +71,8 @@
       "thumb": "data/thumbs/tiktok-7682075480933010710.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "סודות"
+      "category": "סודות",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:Tg9awvndl6s",
@@ -81,7 +85,8 @@
       "thumb": "https://i.ytimg.com/vi/Tg9awvndl6s/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "כללי"
+      "category": "כללי",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7522541965561433352",
@@ -94,7 +99,8 @@
       "thumb": "data/thumbs/tiktok-7522541965561433352.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "כללי"
+      "category": "כללי",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:X2KsOXzzRBg",
@@ -107,7 +113,8 @@
       "thumb": "https://i.ytimg.com/vi/X2KsOXzzRBg/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "סודות"
+      "category": "סודות",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7453083365491674386",
@@ -120,7 +127,8 @@
       "thumb": "data/thumbs/tiktok-7453083365491674386.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "רדסטון"
+      "category": "רדסטון",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:tQOTfuJwX9U",
@@ -133,7 +141,8 @@
       "thumb": "https://i.ytimg.com/vi/tQOTfuJwX9U/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "PvP"
+      "category": "PvP",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7427795076325051670",
@@ -146,7 +155,8 @@
       "thumb": "data/thumbs/tiktok-7427795076325051670.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "בנייה"
+      "category": "בנייה",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:y0sFy8rpeLE",
@@ -159,7 +169,8 @@
       "thumb": "https://i.ytimg.com/vi/y0sFy8rpeLE/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "כללי"
+      "category": "כללי",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7642205722796690710",
@@ -172,7 +183,8 @@
       "thumb": "data/thumbs/tiktok-7642205722796690710.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "כללי"
+      "category": "כללי",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:IcxOVcHJjhA",
@@ -185,7 +197,8 @@
       "thumb": "https://i.ytimg.com/vi/IcxOVcHJjhA/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "רדסטון"
+      "category": "רדסטון",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7557447594205564191",
@@ -198,7 +211,8 @@
       "thumb": "data/thumbs/tiktok-7557447594205564191.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "רדסטון"
+      "category": "רדסטון",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:QhykbvIZj4Y",
@@ -211,7 +225,8 @@
       "thumb": "https://i.ytimg.com/vi/QhykbvIZj4Y/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "רדסטון"
+      "category": "רדסטון",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7654658537083112737",
@@ -224,7 +239,8 @@
       "thumb": "data/thumbs/tiktok-7654658537083112737.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "חוות"
+      "category": "חוות",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:ZljwmF8jKEg",
@@ -237,7 +253,8 @@
       "thumb": "https://i.ytimg.com/vi/ZljwmF8jKEg/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "רדסטון"
+      "category": "רדסטון",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7639879335721094431",
@@ -250,7 +267,8 @@
       "thumb": "data/thumbs/tiktok-7639879335721094431.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "כללי"
+      "category": "כללי",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:aUcNz-2FXN0",
@@ -263,7 +281,8 @@
       "thumb": "https://i.ytimg.com/vi/aUcNz-2FXN0/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "רדסטון"
+      "category": "רדסטון",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7691421638268701974",
@@ -276,7 +295,8 @@
       "thumb": "data/thumbs/tiktok-7691421638268701974.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "בנייה"
+      "category": "בנייה",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:G6o_B7MtnSI",
@@ -289,7 +309,8 @@
       "thumb": "https://i.ytimg.com/vi/G6o_B7MtnSI/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "חוות"
+      "category": "חוות",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7612429572390358286",
@@ -302,7 +323,8 @@
       "thumb": "data/thumbs/tiktok-7612429572390358286.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "בנייה"
+      "category": "בנייה",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:7SCkDNKUmrM",
@@ -315,7 +337,8 @@
       "thumb": "https://i.ytimg.com/vi/7SCkDNKUmrM/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "חוות"
+      "category": "חוות",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7611355938624228615",
@@ -328,7 +351,8 @@
       "thumb": "data/thumbs/tiktok-7611355938624228615.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "רדסטון"
+      "category": "רדסטון",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:REPpwnx0EKM",
@@ -341,7 +365,8 @@
       "thumb": "https://i.ytimg.com/vi/REPpwnx0EKM/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "חוות"
+      "category": "חוות",
+      "day": "2026-10-01"
     },
     {
       "id": "tt:7689536013739379990",
@@ -354,7 +379,8 @@
       "thumb": "data/thumbs/tiktok-7689536013739379990.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "כללי"
+      "category": "כללי",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:hZbtPmcyxCo",
@@ -367,7 +393,8 @@
       "thumb": "https://i.ytimg.com/vi/hZbtPmcyxCo/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "סודות"
+      "category": "סודות",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:uTHjJb5zemQ",
@@ -380,7 +407,8 @@
       "thumb": "https://i.ytimg.com/vi/uTHjJb5zemQ/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "סודות"
+      "category": "סודות",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:-9ozfAH92XI",
@@ -393,7 +421,8 @@
       "thumb": "https://i.ytimg.com/vi/-9ozfAH92XI/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "סודות"
+      "category": "סודות",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:k2Blc0-Jx28",
@@ -406,7 +435,8 @@
       "thumb": "https://i.ytimg.com/vi/k2Blc0-Jx28/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "בנייה"
+      "category": "בנייה",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:ESlf75F6cN8",
@@ -419,7 +449,8 @@
       "thumb": "https://i.ytimg.com/vi/ESlf75F6cN8/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "בנייה"
+      "category": "בנייה",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:mIddK8UVGYk",
@@ -432,7 +463,8 @@
       "thumb": "https://i.ytimg.com/vi/mIddK8UVGYk/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "כללי"
+      "category": "כללי",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:8VJsigWPuFQ",
@@ -445,7 +477,8 @@
       "thumb": "https://i.ytimg.com/vi/8VJsigWPuFQ/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "כללי"
+      "category": "כללי",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:Nnnp_8p31jA",
@@ -458,7 +491,8 @@
       "thumb": "https://i.ytimg.com/vi/Nnnp_8p31jA/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "כללי"
+      "category": "כללי",
+      "day": "2026-10-01"
     },
     {
       "id": "yt:oMl01DLqs-M",
@@ -471,7 +505,10 @@
       "thumb": "https://i.ytimg.com/vi/oMl01DLqs-M/hqdefault.jpg",
       "views": null,
       "publishedAt": null,
-      "category": "PvP"
+      "category": "PvP",
+      "day": "2026-10-01"
     }
-  ]
+  ],
+  "recentDays": 1,
+  "newToday": 35
 }
