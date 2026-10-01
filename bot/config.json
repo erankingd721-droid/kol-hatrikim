@@ -1,7 +1,7 @@
 {
   "lookbackDays": 7,
-  "maxTricksPerWeek": 24,
-  "maxPerPlatform": 16,
+  "maxTricksPerWeek": 36,
+  "maxPerPlatform": 24,
   "youtube": {
     "linksFile": "bot/youtube-links.txt",
     "queries": [

@@ -1,0 +1,20 @@
+# קישורים לסרטוני TikTok שהבוט יעלה לאתר בסריקה הבאה.
+# קישור אחד בכל שורה, לדוגמה:
+# https://www.tiktok.com/@username/video/1234567890123456789
+# גם קישורים מקוצרים עובדים (https://vm.tiktok.com/...).
+# שורות שמתחילות ב-# לא נקראות. סרטון שכבר עלה בשבוע קודם לא יעלה שוב.
+
+# --- השבוע הראשון (נבחרו ידנית מחיפוש ב-TikTok, 01.10.2026) ---
+https://www.tiktok.com/@real_assassin_x/video/7691300956654406942
+https://www.tiktok.com/@robstixstudio/video/7682075480933010710
+https://www.tiktok.com/@startcraft1/video/7522541965561433352
+https://www.tiktok.com/@cubius_yt/video/7453083365491674386
+https://www.tiktok.com/@lomby_yt/video/7427795076325051670
+https://www.tiktok.com/@minehunter_mc/video/7642205722796690710
+https://www.tiktok.com/@psivolt/video/7557447594205564191
+https://www.tiktok.com/@gameshub310/video/7654658537083112737
+https://www.tiktok.com/@its_king_blake/video/7639879335721094431
+https://www.tiktok.com/@minelandofficia/video/7691421638268701974
+https://www.tiktok.com/@locky.minecraft/video/7612429572390358286
+https://www.tiktok.com/@zerobuilds0/video/7611355938624228615
+https://www.tiktok.com/@aceofspades2.0/video/7689536013739379990

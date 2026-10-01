@@ -10,9 +10,13 @@
 //   TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET  (רשות) גישה ל-TikTok Research API
 //   BOT_NOW                                 (רשות) תאריך הרצה מדומה, לבדיקות
 
-import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, readdir, rm } from 'node:fs/promises';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+const execFileAsync = promisify(execFile);
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = path.join(ROOT, 'data');
@@ -290,19 +294,51 @@ async function resolveTikTok(link) {
   return id ? { id, url: res.url.split('?')[0] } : null;
 }
 
+// ImageMagick (קיים בשרתים של GitHub). ב-Windows לא נוגעים ב-convert, כי שם זו פקודה אחרת לגמרי.
+let imageTool;
+async function findImageTool() {
+  if (imageTool !== undefined) return imageTool;
+  imageTool = null;
+  const candidates = process.platform === 'win32' ? ['magick'] : ['magick', 'convert'];
+  for (const cmd of candidates) {
+    try {
+      await execFileAsync(cmd, ['-version']);
+      imageTool = cmd;
+      break;
+    } catch {
+      // לא מותקן
+    }
+  }
+  return imageTool;
+}
+
+// TikTok שולח לפעמים PNG של כמה מגה. מקטינים ל-JPG ברוחב 540 כשאפשר.
 async function saveThumb(url, id) {
   try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(20000), headers: { 'User-Agent': UA } });
+    const res = await fetch(url, { signal: AbortSignal.timeout(30000), headers: { 'User-Agent': UA } });
     const type = res.headers.get('content-type') || '';
     if (!res.ok || !type.startsWith('image/')) return null;
     const buf = Buffer.from(await res.arrayBuffer());
-    if (buf.length > 1_500_000) return null;
+    if (buf.length > 8_000_000) return null;
+    await mkdir(path.join(DATA, 'thumbs'), { recursive: true });
+
+    const tool = await findImageTool();
+    if (tool && buf.length > 150_000) {
+      const rel = `data/thumbs/tiktok-${id}.jpg`;
+      if (DRY) return rel;
+      const tmp = path.join(DATA, 'thumbs', `tmp-${id}`);
+      await writeFile(tmp, buf);
+      try {
+        await execFileAsync(tool, [tmp, '-resize', '540x>', '-strip', '-quality', '80', path.join(ROOT, rel)]);
+        return rel;
+      } finally {
+        await rm(tmp, { force: true });
+      }
+    }
+
     const ext = type.includes('png') ? 'png' : type.includes('webp') ? 'webp' : 'jpg';
     const rel = `data/thumbs/tiktok-${id}.${ext}`;
-    if (!DRY) {
-      await mkdir(path.join(DATA, 'thumbs'), { recursive: true });
-      await writeFile(path.join(ROOT, rel), buf);
-    }
+    if (!DRY) await writeFile(path.join(ROOT, rel), buf);
     return rel;
   } catch {
     return null;
@@ -338,7 +374,9 @@ async function tiktok(prior) {
   for (const v of candidates.values()) {
     if (prior.has('tt:' + v.id)) continue;
     try {
-      const o = await getJson(`https://www.tiktok.com/oembed?url=${encodeURIComponent(v.url)}`);
+      const oembedUrl = `https://www.tiktok.com/oembed?url=${encodeURIComponent(v.url)}`;
+      // TikTok לפעמים איטי: ניסיון שני לפני שמוותרים
+      const o = await getJson(oembedUrl).catch(() => getJson(oembedUrl));
       const text = [o.title, v.text].join(' ');
       // קישורים שהוספתם ידנית עוברים תמיד; כל השאר צריכים להיראות כמו טריק
       if (!v.manual && !isTrick(text)) continue;
@@ -428,7 +466,13 @@ async function main() {
       chosen.add(t);
     }
   }
-  const tricks = sorted.filter((t) => chosen.has(t)).map(({ manual, ...rest }) => rest);
+  // באתר מערבבים: YouTube, TikTok, YouTube, TikTok...
+  const lists = ['youtube', 'tiktok'].map((p) => sorted.filter((t) => chosen.has(t) && t.platform === p));
+  const tricks = [];
+  for (let i = 0; i < Math.max(...lists.map((l) => l.length)); i++) {
+    for (const l of lists) if (l[i]) tricks.push(l[i]);
+  }
+  for (const t of tricks) delete t.manual;
 
   const week = {
     week: weekId,
