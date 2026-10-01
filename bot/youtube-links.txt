@@ -1,0 +1,27 @@
+# קישורים לסרטוני YouTube (Shorts או רגילים) שהבוט יעלה לאתר בסריקה הבאה.
+# עובד גם בלי מפתח API. קישור אחד בכל שורה. שורות שמתחילות ב-# לא נקראות.
+# סרטון שכבר עלה בשבוע קודם לא יעלה שוב, אז אפשר להשאיר כאן קישורים ישנים.
+
+# --- השבוע הראשון (נבחרו ידנית מחיפוש ביוטיוב, 01.10.2026) ---
+https://www.youtube.com/shorts/8Sld6cXoPuY
+https://www.youtube.com/shorts/USu0VDttwrk
+https://www.youtube.com/shorts/Tg9awvndl6s
+https://www.youtube.com/shorts/X2KsOXzzRBg
+https://www.youtube.com/shorts/tQOTfuJwX9U
+https://www.youtube.com/shorts/y0sFy8rpeLE
+https://www.youtube.com/shorts/IcxOVcHJjhA
+https://www.youtube.com/shorts/QhykbvIZj4Y
+https://www.youtube.com/shorts/ZljwmF8jKEg
+https://www.youtube.com/shorts/aUcNz-2FXN0
+https://www.youtube.com/shorts/G6o_B7MtnSI
+https://www.youtube.com/shorts/7SCkDNKUmrM
+https://www.youtube.com/shorts/REPpwnx0EKM
+https://www.youtube.com/shorts/hZbtPmcyxCo
+https://www.youtube.com/shorts/uTHjJb5zemQ
+https://www.youtube.com/shorts/-9ozfAH92XI
+https://www.youtube.com/shorts/k2Blc0-Jx28
+https://www.youtube.com/shorts/ESlf75F6cN8
+https://www.youtube.com/shorts/mIddK8UVGYk
+https://www.youtube.com/shorts/8VJsigWPuFQ
+https://www.youtube.com/shorts/Nnnp_8p31jA
+https://www.youtube.com/shorts/oMl01DLqs-M

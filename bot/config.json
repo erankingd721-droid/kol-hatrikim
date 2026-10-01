@@ -1,0 +1,46 @@
+{
+  "lookbackDays": 7,
+  "maxTricksPerWeek": 24,
+  "maxPerPlatform": 16,
+  "youtube": {
+    "linksFile": "bot/youtube-links.txt",
+    "queries": [
+      "minecraft trick",
+      "minecraft hack",
+      "minecraft tips",
+      "minecraft secret",
+      "minecraft build hack",
+      "redstone trick",
+      "טריק מיינקראפט"
+    ],
+    "resultsPerQuery": 25,
+    "maxDurationSeconds": 180,
+    "minViews": 1000
+  },
+  "tiktok": {
+    "linksFile": "bot/tiktok-links.txt",
+    "researchHashtags": ["minecrafttricks", "minecrafthacks", "minecrafttips", "minecraftbuildhacks", "minecraftsecrets", "redstone"],
+    "researchMaxCount": 100
+  },
+  "mustMatch": {
+    "minecraft": ["minecraft", "מיינקראפט", "מיינקרפט", "מינקראפט", "redstone"],
+    "trick": [
+      "trick", "hack", "hacks", "tip", "tips", "secret", "secrets", "tutorial", "how to", "glitch", "idea", "ideas",
+      "minecrafttips", "lifehack",
+      "טריק", "טריקים", "האק", "טיפ", "טיפים", "סוד", "סודות", "איך ל"
+    ]
+  },
+  "exclude": [
+    "hacked client", "hack client", "xray", "x-ray", "cheat", "cheats", "free minecraft", "free robux",
+    "giveaway", "roblox", "fortnite", "nsfw", "18+"
+  ],
+  "categories": [
+    { "name": "רדסטון", "words": ["redstone", "piston", "pistons", "observer", "hopper", "comparator", "repeater", "door", "doors", "רדסטון", "פיסטון", "דלת"] },
+    { "name": "חוות", "words": ["farm", "farms", "farming", "xp", "חווה", "חוות"] },
+    { "name": "PvP", "words": ["pvp", "combat", "sword", "mace", "crystal", "bedwars", "skywars", "clutch", "קרב"] },
+    { "name": "סודות", "words": ["secret", "secrets", "hidden", "easter egg", "סוד", "סודי", "סודות", "נסתר", "מוסתר"] },
+    { "name": "בנייה", "words": ["build", "builds", "building", "house", "base", "roof", "interior", "design", "decor", "בנייה", "בית", "בסיס", "עיצוב"] },
+    { "name": "הישרדות", "words": ["survival", "mlg", "water bucket", "speedrun", "nether", "הישרדות"] }
+  ],
+  "defaultCategory": "כללי"
+}
