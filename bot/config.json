@@ -1,6 +1,8 @@
 {
-  "lookbackDays": 7,
-  "maxTricksPerWeek": 36,
+  "lookbackDays": 2,
+  "recentDays": 7,
+  "maxOnHomePage": 150,
+  "maxTricksPerRun": 36,
   "maxPerPlatform": 24,
   "youtube": {
     "linksFile": "bot/youtube-links.txt",

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// הבוט השבועי של "כל הטריקים".
+// הבוט היומי של "כל הטריקים".
 // סורק את YouTube Shorts ואת TikTok, מסנן טריקים של מיינקראפט וכותב אותם ל-data/.
 //
 // הרצה:  node bot/bot.mjs          (כותב קבצים)
@@ -27,7 +27,8 @@ const UA = 'Mozilla/5.0 (compatible; kol-hatrikim-bot/1.0)';
 const config = JSON.parse(await readFile(path.join(ROOT, 'bot', 'config.json'), 'utf8'));
 const now = new Date(process.env.BOT_NOW || Date.now());
 const from = new Date(now.getTime() - config.lookbackDays * DAY);
-const to = new Date(now.getTime() - DAY);
+const to = now;
+// כל הרצה (פעם ביום) נשמרת בקובץ משלה לפי התאריך: data/weeks/<תאריך>.json
 const weekId = isoDate(now);
 
 const isMinecraft = matcher(config.mustMatch.minecraft);
@@ -432,7 +433,7 @@ async function safely(name, fn) {
 const rank = (a, b) => (b.manual ? 1 : 0) - (a.manual ? 1 : 0) || (b.views ?? -1) - (a.views ?? -1);
 
 async function main() {
-  log(`שבוע ${weekId}: סרטונים מ-${isoDate(from)} עד ${isoDate(to)}`);
+  log(`סריקה ${weekId}: סרטונים מ-${isoDate(from)} עד ${isoDate(to)}`);
   const prior = await priorIds();
   const [yt, tt] = await Promise.all([safely('YouTube', () => youtube(prior)), safely('TikTok', () => tiktok(prior))]);
 
@@ -442,25 +443,25 @@ async function main() {
     return;
   }
 
-  // אם הבוט רץ שוב באותו שבוע, שומרים את מה שכבר נמצא
+  // אם הבוט רץ שוב באותו יום, שומרים את מה שכבר נמצא
   const existing = await readJson(path.join(DATA, 'weeks', `${weekId}.json`), { tricks: [] });
   const pool = new Map();
   for (const t of [...existing.tricks, ...yt.items, ...tt.items]) {
     if (!prior.has(t.id)) pool.set(t.id, { ...pool.get(t.id), ...t });
   }
 
-  // קודם עד maxPerPlatform מכל פלטפורמה, ואם נשאר מקום (למשל אין TikTok השבוע) ממלאים ממה שנשאר
+  // קודם עד maxPerPlatform מכל פלטפורמה, ואם נשאר מקום (למשל אין TikTok היום) ממלאים ממה שנשאר
   const sorted = [...pool.values()].sort(rank);
   const per = { youtube: 0, tiktok: 0 };
   const chosen = new Set();
   for (const t of sorted) {
-    if (chosen.size >= config.maxTricksPerWeek) break;
+    if (chosen.size >= config.maxTricksPerRun) break;
     if (per[t.platform] >= config.maxPerPlatform) continue;
     per[t.platform]++;
     chosen.add(t);
   }
   for (const t of sorted) {
-    if (chosen.size >= config.maxTricksPerWeek) break;
+    if (chosen.size >= config.maxTricksPerRun) break;
     if (!chosen.has(t)) {
       per[t.platform]++;
       chosen.add(t);
@@ -494,15 +495,28 @@ async function main() {
   }
 
   await mkdir(path.join(DATA, 'weeks'), { recursive: true });
-  const json = JSON.stringify(week, null, 2) + '\n';
-  await writeFile(path.join(DATA, 'weeks', `${weekId}.json`), json);
-  await writeFile(path.join(DATA, 'latest.json'), json);
+  await writeFile(path.join(DATA, 'weeks', `${weekId}.json`), JSON.stringify(week, null, 2) + '\n');
 
   const weeks = (await readJson(path.join(DATA, 'weeks.json'), [])).filter((w) => w.week !== weekId);
   weeks.push({ week: weekId, from: week.from, to: week.to, count: tricks.length });
   weeks.sort((a, b) => b.week.localeCompare(a.week));
   await writeFile(path.join(DATA, 'weeks.json'), JSON.stringify(weeks, null, 2) + '\n');
-  log('נכתב: data/latest.json, data/weeks.json, data/weeks/' + weekId + '.json');
+
+  // העמוד הראשי: כל הטריקים מהימים האחרונים ביחד (החדשים קודם), כדי שתמיד יהיה הרבה
+  const recent = [];
+  const seen = new Set();
+  const days = weeks.slice(0, config.recentDays);
+  for (const w of days) {
+    const d = w.week === weekId ? week : await readJson(path.join(DATA, 'weeks', `${w.week}.json`), { tricks: [] });
+    for (const t of d.tricks || []) {
+      if (seen.has(t.id)) continue;
+      seen.add(t.id);
+      recent.push({ ...t, day: w.week });
+    }
+  }
+  const latest = { ...week, recentDays: days.length, newToday: tricks.length, tricks: recent.slice(0, config.maxOnHomePage) };
+  await writeFile(path.join(DATA, 'latest.json'), JSON.stringify(latest, null, 2) + '\n');
+  log(`נכתב: data/weeks/${weekId}.json, data/weeks.json, data/latest.json (${latest.tricks.length} טריקים מ-${days.length} ימים)`);
 }
 
 await main();
