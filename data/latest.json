@@ -1,8 +1,8 @@
 {
-  "week": "2026-10-01",
-  "from": "2026-09-29",
-  "to": "2026-10-01",
-  "generatedAt": "2026-10-01T14:30:22.801Z",
+  "week": "2026-10-02",
+  "from": "2026-09-30",
+  "to": "2026-10-02",
+  "generatedAt": "2026-10-02T00:09:01.920Z",
   "scanned": 35,
   "sources": {
     "youtube": {
@@ -509,6 +509,6 @@
       "day": "2026-10-01"
     }
   ],
-  "recentDays": 1,
-  "newToday": 35
+  "recentDays": 2,
+  "newToday": 0
 }
