@@ -58,7 +58,7 @@ html[data-theme="mc"] {
   --filters-shadow: inset 3px 3px 0 #ffffff, inset -3px -3px 0 #555555;
   --filters-pad: 16px 18px;
 
-  --bot-bg: rgba(0, 0, 0, 0.62);
+  --bot-bg: rgba(0, 0, 0, 0.78);
   --bot-border: 0;
   --bot-radius: 0;
   --bot-shadow: none;
@@ -67,7 +67,6 @@ html[data-theme="mc"] {
   --cell-bg: rgba(0, 0, 0, 0.45);
   --cell-border: 0;
   --cell-radius: 0;
-  --countdown: #ffff55;
   --line: rgba(255, 255, 255, 0.18);
 
   --ok: #55ff55;
@@ -167,7 +166,6 @@ html[data-theme="toxic"] {
   --cell-bg: #050705;
   --cell-border: 1px solid #1d271f;
   --cell-radius: 4px;
-  --countdown: #ff4f4f;
   --line: #1d271f;
 
   --ok: #7cf03a;
@@ -267,7 +265,6 @@ html[data-theme="arcade"] {
   --cell-bg: #121010;
   --cell-border: 2px solid #3e3c3c;
   --cell-radius: 0;
-  --countdown: #e7e4e1;
   --line: #3e3c3c;
 
   --ok: #a6f35f;
@@ -503,25 +500,23 @@ h1 {
   gap: 18px;
 }
 .bot-label { font-size: 13px; font-weight: 700; color: var(--bot-muted); }
-.countdown { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.cd-cell {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 12px 4px 8px;
-  background: var(--cell-bg);
-  border: var(--cell-border);
-  border-radius: var(--cell-radius);
+/* הסרטון שמתחלף כל 3 דקות */
+.now-media {
+  position: relative;
+  width: min(100%, 250px);
+  aspect-ratio: 9 / 16;
+  margin-inline: auto;
+  overflow: hidden;
+  background: #000000;
+  border: var(--thumb-border);
+  border-color: var(--thumb-border-color);
+  border-radius: var(--thumb-radius);
 }
-.cd-num {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 34px;
-  line-height: 1.15;
-  color: var(--countdown);
-  font-variant-numeric: tabular-nums;
-}
-.cd-label { font-size: 12px; color: var(--bot-muted); }
+.now-media iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.now-info { text-align: center; }
+.now-title { font-weight: 800; font-size: 16px; line-height: 1.35; overflow-wrap: anywhere; }
+.now-meta { margin-top: 4px; font-size: 14px; color: var(--bot-muted); }
+.now-meta a { margin-inline-start: 6px; font-weight: 700; }
 .bot-rows {
   margin: 0;
   padding-top: 16px;
@@ -782,7 +777,7 @@ h1 {
 /* מיינקראפט: שמיים, עננים, דשא, כיתוב צהוב מוטה, טקסט עם צל */
 [data-theme="mc"] .clouds { display: block; }
 [data-theme="mc"] .cloud { position: absolute; background: #ffffff; }
-[data-theme="mc"] .c1 { top: 150px; left: 5%; width: 176px; height: 32px; opacity: 0.85; box-shadow: 56px -24px 0 #ffffff; }
+[data-theme="mc"] .c1 { top: 96px; left: 40%; width: 176px; height: 32px; opacity: 0.85; box-shadow: 56px -24px 0 #ffffff; }
 [data-theme="mc"] .c2 { top: 380px; right: 3%; width: 128px; height: 24px; opacity: 0.7; box-shadow: -40px -16px 0 #ffffff; }
 [data-theme="mc"] .ground {
   display: block;
@@ -839,7 +834,6 @@ h1 {
 [data-theme="arcade"] .card { padding: 12px; gap: 12px; }
 [data-theme="arcade"] .card .btn { margin-left: 4px; margin-bottom: 4px; }
 [data-theme="arcade"] .chip:active, [data-theme="arcade"] .btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #0a0909; }
-[data-theme="arcade"] .cd-num { font-weight: 600; }
 
 /* ---------- טלפון ---------- */
 @media (max-width: 640px) {
@@ -851,7 +845,6 @@ h1 {
   .card-title { font-size: 15px; }
   .card .btn { font-size: 14px; }
   .play { width: 44px; height: 44px; margin: -22px 0 0 -22px; }
-  .cd-num { font-size: 26px; }
   .bot-panel { padding: 20px; }
   [data-theme="mc"] .logo { font-size: 42px; }
   [data-theme="mc"] .clouds { display: none; }

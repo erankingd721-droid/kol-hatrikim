@@ -110,26 +110,49 @@
   });
   setTheme(document.documentElement.getAttribute('data-theme') || 'mc');
 
-  // ---------- ספירה לאחור לסריקה הבאה (כל יום ב-03:00) ----------
+  // ---------- סרטון עכשיו: מתחלף כל 3 דקות ----------
+  // לפי השעון, כך שכל מי שנכנס לאתר באותו רגע רואה את אותו סרטון
 
-  function nextScan(now) {
-    const d = new Date(now);
-    d.setHours(3, 0, 0, 0);
-    if (d <= now) d.setDate(d.getDate() + 1);
-    return d;
+  const NOW_SLOT = 3 * 60 * 1000;
+  let nowTimer = null;
+
+  function nowEmbed(t) {
+    const id = t.videoId || '';
+    if (t.platform === 'youtube' && /^[\w-]{11}$/.test(id)) {
+      return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&rel=0&loop=1&playlist=${id}`;
+    }
+    if (t.platform === 'tiktok' && /^\d{5,25}$/.test(id)) {
+      return `https://www.tiktok.com/player/v1/${id}?autoplay=1&muted=1&loop=1&music_info=1&description=0&rel=0`;
+    }
+    return null;
   }
 
-  const cd = {};
-  document.querySelectorAll('.cd-num').forEach((el) => { cd[el.dataset.unit] = el; });
-  function tick() {
-    const now = new Date();
-    const left = Math.max(0, Math.floor((nextScan(now) - now) / 1000));
-    cd.h.textContent = pad(Math.floor(left / 3600));
-    cd.m.textContent = pad(Math.floor((left % 3600) / 60));
-    cd.s.textContent = pad(left % 60);
+  function showNow() {
+    clearTimeout(nowTimer);
+    const list = state.tricks.filter((t) => nowEmbed(t));
+    if (!list.length) {
+      $('#now-title').textContent = 'אין עדיין סרטונים.';
+      return;
+    }
+    const t = list[Math.floor(Date.now() / NOW_SLOT) % list.length];
+    $('#now-media').replaceChildren(h('iframe', {
+      src: nowEmbed(t),
+      title: t.title,
+      allow: 'autoplay; encrypted-media; picture-in-picture; fullscreen',
+      allowfullscreen: true,
+      referrerpolicy: 'strict-origin-when-cross-origin',
+    }));
+    $('#now-title').textContent = t.title;
+    $('#now-author').textContent = t.author || '';
+    const link = $('#now-link');
+    const url = safeUrl(t.url);
+    link.hidden = !url;
+    if (url) {
+      link.href = url;
+      link.textContent = `פתיחה ב-${PLATFORMS[t.platform].name}`;
+    }
+    nowTimer = setTimeout(showNow, NOW_SLOT - (Date.now() % NOW_SLOT) + 300);
   }
-  tick();
-  setInterval(tick, 1000);
 
   // ---------- כרטיס טריק ----------
 
@@ -303,7 +326,7 @@
     let sub = 'הבוט עוד לא סיים את הסריקה הראשונה שלו.';
     if (day && archiveWeek) sub = `${state.tricks.length} טריקים ${where}`;
     else if (day && data.recentDays > 1) {
-      sub = `${state.tricks.length} טריקים ${where} מ-${data.recentDays} הימים האחרונים`;
+      sub = `${state.tricks.length} טריקים ${where} מהימים האחרונים`;
       if (data.newToday > 0) sub += ` · ${data.newToday} חדשים ${when}`;
     }
     else if (day) sub = `${state.tricks.length} טריקים ${where} · הסריקה האחרונה ${when}`;
@@ -335,6 +358,7 @@
 
     renderCats();
     renderGrid();
+    showNow();
   }
 
   function renderArchive(weeks) {
