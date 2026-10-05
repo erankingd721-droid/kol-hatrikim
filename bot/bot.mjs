@@ -505,7 +505,8 @@ async function main() {
   // העמוד הראשי: כל הטריקים מהימים האחרונים ביחד (החדשים קודם), כדי שתמיד יהיה הרבה
   const recent = [];
   const seen = new Set();
-  const days = weeks.slice(0, config.recentDays);
+  // רק ימים שנמצאו בהם טריקים, כדי שימים ריקים לא ידחפו את הטריקים החוצה
+  const days = weeks.filter((w) => w.count > 0).slice(0, config.recentDays);
   for (const w of days) {
     const d = w.week === weekId ? week : await readJson(path.join(DATA, 'weeks', `${w.week}.json`), { tricks: [] });
     for (const t of d.tricks || []) {
