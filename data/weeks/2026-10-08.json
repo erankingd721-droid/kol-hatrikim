@@ -1,0 +1,21 @@
+{
+  "week": "2026-10-08",
+  "from": "2026-10-06",
+  "to": "2026-10-08",
+  "generatedAt": "2026-10-08T00:08:59.651Z",
+  "scanned": 35,
+  "sources": {
+    "youtube": {
+      "ok": true,
+      "mode": "links",
+      "reason": null,
+      "scanned": 22
+    },
+    "tiktok": {
+      "ok": true,
+      "mode": "links",
+      "scanned": 13
+    }
+  },
+  "tricks": []
+}
